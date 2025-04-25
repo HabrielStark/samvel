@@ -1,0 +1,146 @@
+@import 'variables';
+
+.navbar {
+  background-color: $primary-color;
+  color: $white;
+  padding: $spacer-3 0;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+
+  &-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-brand {
+    h1 {
+      font-size: 1.8rem;
+      color: $white;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      
+      i {
+        margin-right: $spacer-1;
+        color: $secondary-color;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover i {
+        transform: rotate(15deg);
+      }
+    }
+  }
+
+  &-menu {
+    display: flex;
+    align-items: center;
+
+    li {
+      margin-left: $spacer-3;
+      position: relative;
+
+      a {
+        color: $white;
+        padding: $spacer-1 $spacer-2;
+        font-weight: $font-weight-bold;
+        transition: all 0.3s ease;
+        border-radius: $border-radius;
+        position: relative;
+
+        &:hover {
+          background-color: rgba($white, 0.15);
+          transform: translateY(-2px);
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: -2px;
+          left: 50%;
+          background-color: $secondary-color;
+          transition: all 0.3s ease;
+          transform: translateX(-50%);
+        }
+
+        &:hover::after {
+          width: 70%;
+        }
+      }
+    }
+  }
+
+  &-toggler {
+    display: none;
+    background: transparent;
+    color: $white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .navbar {
+    &-toggler {
+      display: block;
+    }
+
+    &-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: $primary-color;
+      border-top: 1px solid rgba($white, 0.1);
+      padding: $spacer-3;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+
+      &.show {
+        display: flex;
+        animation: slideDown 0.3s ease-in-out;
+      }
+
+      li {
+        margin: $spacer-2 0;
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+
+        a {
+          display: block;
+          padding: $spacer-2;
+
+          &::after {
+            bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+} 

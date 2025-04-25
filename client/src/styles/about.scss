@@ -1,0 +1,388 @@
+@import 'variables';
+
+.about-container {
+  padding: $spacer-5 0;
+  background: linear-gradient(to bottom, rgba($light-color, 0.3), $white 15%);
+
+  .about-header {
+    text-align: center;
+    margin-bottom: $spacer-5;
+
+    h1 {
+      font-size: 3rem;
+      color: $primary-color;
+      margin-bottom: $spacer-3;
+      font-weight: 700;
+    }
+
+    .about-subtitle {
+      font-size: 1.2rem;
+      color: $dark-color;
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+  }
+
+  .about-section {
+    display: flex;
+    align-items: center;
+    gap: $spacer-5;
+    margin-bottom: $spacer-5;
+
+    .about-image {
+      flex: 1;
+      img {
+        max-width: 100%;
+        border-radius: $border-radius;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+      }
+    }
+
+    .about-content {
+      flex: 1;
+
+      h2 {
+        font-size: 2rem;
+        color: $primary-color;
+        margin-bottom: $spacer-3;
+        position: relative;
+        padding-bottom: $spacer-2;
+        font-weight: 600;
+
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 80px;
+          height: 3px;
+          background-color: $secondary-color;
+          border-radius: 1.5px;
+          transition: width 0.3s ease;
+        }
+
+        &:hover:after {
+          width: 120px;
+        }
+      }
+
+      p {
+        margin-bottom: $spacer-2;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: rgba($dark-color, 0.85);
+      }
+    }
+  }
+
+  .about-values, .about-team, .about-contact {
+    margin-bottom: $spacer-5;
+
+    h2 {
+      font-size: 2rem;
+      color: $primary-color;
+      margin-bottom: $spacer-4;
+      text-align: center;
+      position: relative;
+      padding-bottom: $spacer-2;
+      font-weight: 600;
+
+      &:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background-color: $secondary-color;
+        border-radius: 1.5px;
+        transition: width 0.3s ease;
+      }
+
+      &:hover:after {
+        width: 120px;
+      }
+    }
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacer-4;
+
+    .value-card {
+      background-color: $white;
+      padding: $spacer-4;
+      border-radius: $border-radius;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+
+        .value-icon {
+          background-color: rgba($primary-color, 0.2);
+          transform: rotateY(360deg);
+        }
+      }
+
+      .value-icon {
+        width: 70px;
+        height: 70px;
+        background-color: rgba($primary-color, 0.1);
+        color: $primary-color;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto $spacer-3;
+        font-size: 1.8rem;
+        transition: all 0.6s ease;
+      }
+
+      h3 {
+        margin-bottom: $spacer-2;
+        color: $primary-color;
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
+
+      p {
+        margin-bottom: $spacer-2;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: rgba($dark-color, 0.8);
+      }
+    }
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacer-4;
+
+    .team-member {
+      background-color: $white;
+      border-radius: $border-radius;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+
+        .member-image img {
+          transform: scale(1.05);
+        }
+
+        h3 {
+          color: $secondary-color;
+        }
+      }
+
+      .member-image {
+        overflow: hidden;
+        height: 250px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+      }
+
+      h3 {
+        padding: $spacer-3 $spacer-3 $spacer-1;
+        color: $primary-color;
+        font-size: 1.3rem;
+        text-align: center;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      p {
+        padding: 0 $spacer-3 $spacer-3;
+        color: rgba($dark-color, 0.7);
+        text-align: center;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .about-contact {
+    text-align: center;
+    background-color: rgba($light-color, 0.5);
+    padding: $spacer-5 $spacer-4;
+    border-radius: $border-radius;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    margin: 0 auto;
+    max-width: 1200px;
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: $spacer-4;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+      color: rgba($dark-color, 0.9);
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: $spacer-5;
+      margin-top: $spacer-4;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+
+      .contact-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: $spacer-1;
+        transition: all 0.3s ease;
+        min-width: 220px;
+        margin-bottom: $spacer-3;
+        padding: $spacer-4 $spacer-3;
+        background-color: rgba($white, 0.8);
+        border-radius: $border-radius;
+        flex: 1;
+        max-width: 280px;
+        height: 100%;
+
+        &:hover {
+          transform: translateY(-5px);
+          background-color: $white;
+          box-shadow: 0 15px 25px rgba(0, 0, 0, 0.12);
+
+          i {
+            background-color: $primary-color;
+            color: $white;
+            transform: scale(1.05);
+          }
+        }
+
+        i {
+          font-size: 1.8rem;
+          color: $primary-color;
+          width: 80px;
+          height: 80px;
+          background-color: rgba($primary-color, 0.1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          margin-bottom: $spacer-3;
+          box-shadow: 0 5px 15px rgba($primary-color, 0.15);
+        }
+
+        p {
+          margin: 0;
+          margin-bottom: $spacer-1;
+          font-size: 1.1rem;
+          word-break: break-word;
+          max-width: 100%;
+          &:first-of-type {
+            font-weight: 600;
+            color: $primary-color;
+          }
+          &:last-of-type {
+            font-weight: 400;
+            color: rgba($dark-color, 0.85);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .about-container {
+    .about-section {
+      flex-direction: column;
+      text-align: center;
+
+      .about-content {
+        h2 {
+          &:after {
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
+      }
+    }
+
+    .values-grid,
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .about-container {
+    .about-header {
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    .about-section {
+      .about-content {
+        h2 {
+          font-size: 1.8rem;
+        }
+      }
+    }
+
+    .about-values, .about-team, .about-contact {
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .about-container {
+    .values-grid,
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-contact {
+      padding: $spacer-4 $spacer-3;
+      
+      .contact-info {
+        flex-direction: column;
+        align-items: center;
+        gap: $spacer-4;
+        
+        .contact-item {
+          width: 100%;
+          max-width: 280px;
+          min-width: auto;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+    }
+  }
+} 
