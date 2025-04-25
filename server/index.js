@@ -38,20 +38,36 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/articles', articles);
 
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, '../client/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+  });
+}
+
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-const server = app.listen(
-  PORT,
-  console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
-  )
-);
+// Conditional server start for Vercel deployment
+if (process.env.NODE_ENV !== 'production') {
+  const server = app.listen(
+    PORT,
+    console.log(
+      `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+    )
+  );
 
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (err, promise) => {
-  console.log(`Error: ${err.message}`.red);
-  // Close server & exit process
-  server.close(() => process.exit(1));
-}); 
+  // Handle unhandled promise rejections
+  process.on('unhandledRejection', (err, promise) => {
+    console.log(`Error: ${err.message}`.red);
+    // Close server & exit process
+    server.close(() => process.exit(1));
+  });
+}
+
+// Export app for Vercel
+module.exports = app; 

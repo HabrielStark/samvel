@@ -1,0 +1,22 @@
+{
+  "name": "artblog",
+  "version": "1.0.0",
+  "description": "Modern Web Application for ArtBlog",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "node build.js",
+    "vercel-build": "node build.js"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+} 

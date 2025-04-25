@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import ArticleContext from './articleContext';
 import articleReducer from './articleReducer';
+import config from '../../utils/config';
 import {
   GET_ARTICLES,
   GET_ARTICLE,
@@ -33,7 +34,7 @@ const ArticleState = props => {
     setLoading();
 
     try {
-      const res = await axios.get(`/api/v1/articles?page=${page}&limit=${limit}`);
+      const res = await axios.get(`${config.apiUrl}/articles?page=${page}&limit=${limit}`);
 
       dispatch({
         type: GET_ARTICLES,
@@ -52,7 +53,7 @@ const ArticleState = props => {
     setLoading();
 
     try {
-      const res = await axios.get(`/api/v1/articles/${id}`);
+      const res = await axios.get(`${config.apiUrl}/articles/${id}`);
 
       dispatch({
         type: GET_ARTICLE,
@@ -68,14 +69,14 @@ const ArticleState = props => {
 
   // Add Article
   const addArticle = async article => {
-    const config = {
+    const axiosConfig = {
       headers: {
         'Content-Type': 'application/json'
       }
     };
 
     try {
-      const res = await axios.post('/api/v1/articles', article, config);
+      const res = await axios.post(`${config.apiUrl}/articles`, article, axiosConfig);
 
       dispatch({
         type: ADD_ARTICLE,
@@ -92,7 +93,7 @@ const ArticleState = props => {
   // Delete Article
   const deleteArticle = async id => {
     try {
-      await axios.delete(`/api/v1/articles/${id}`);
+      await axios.delete(`${config.apiUrl}/articles/${id}`);
 
       dispatch({
         type: DELETE_ARTICLE,
@@ -108,7 +109,7 @@ const ArticleState = props => {
 
   // Update Article
   const updateArticle = async article => {
-    const config = {
+    const axiosConfig = {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -116,9 +117,9 @@ const ArticleState = props => {
 
     try {
       const res = await axios.put(
-        `/api/v1/articles/${article._id}`,
+        `${config.apiUrl}/articles/${article._id}`,
         article,
-        config
+        axiosConfig
       );
 
       dispatch({

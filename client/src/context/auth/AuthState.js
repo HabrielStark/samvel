@@ -3,6 +3,7 @@ import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
 import setAuthToken from '../../utils/setAuthToken';
+import config from '../../utils/config';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -32,7 +33,7 @@ const AuthState = props => {
     }
 
     try {
-      const res = await axios.get('/api/v1/auth/me');
+      const res = await axios.get(`${config.apiUrl}/auth/me`);
 
       dispatch({
         type: USER_LOADED,
@@ -55,7 +56,7 @@ const AuthState = props => {
 
     try {
       console.log('Sending registration request to server...');
-      const res = await axios.post('/api/v1/auth/register', formData, config);
+      const res = await axios.post(`${config.apiUrl}/auth/register`, formData, config);
       console.log('Registration successful:', res.data);
 
       dispatch({
@@ -89,14 +90,14 @@ const AuthState = props => {
 
   // Login User
   const login = async formData => {
-    const config = {
+    const axiosConfig = {
       headers: {
         'Content-Type': 'application/json'
       }
     };
 
     try {
-      const res = await axios.post('/api/v1/auth/login', formData, config);
+      const res = await axios.post(`${config.apiUrl}/auth/login`, formData, axiosConfig);
 
       dispatch({
         type: LOGIN_SUCCESS,
@@ -115,7 +116,7 @@ const AuthState = props => {
   // Logout
   const logout = async () => {
     try {
-      await axios.get('/api/v1/auth/logout');
+      await axios.get(`${config.apiUrl}/auth/logout`);
       dispatch({ type: LOGOUT });
     } catch (err) {
       dispatch({ type: LOGOUT });
