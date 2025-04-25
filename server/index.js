@@ -27,7 +27,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Enable CORS
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://samvel-r22r.vercel.app', 'https://samvel.vercel.app', /\.vercel\.app$/] 
+    : 'http://localhost:3000',
+  credentials: true
+}));
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
@@ -52,7 +57,7 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-// Conditional server start for Vercel deployment
+// Conditional server start for regular Node.js environment
 if (process.env.NODE_ENV !== 'production') {
   const server = app.listen(
     PORT,
@@ -69,5 +74,8 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-// Export app for Vercel
-module.exports = app; 
+// For Vercel Serverless Functions
+const serverlessHandler = (req, res) => app(req, res);
+
+// Export app and serverless handler
+module.exports = process.env.NODE_ENV === 'production' ? serverlessHandler : app; 
