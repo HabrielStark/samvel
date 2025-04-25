@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npm run vercel-build",
-  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "bash ./vercel.build.sh",
+  "installCommand": "npm install --no-script",
   "outputDirectory": "client/build",
   "framework": "create-react-app",
   "rewrites": [
