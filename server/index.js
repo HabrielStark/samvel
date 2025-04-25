@@ -26,12 +26,18 @@ app.use(express.json());
 // Cookie parser
 app.use(cookieParser());
 
-// Enable CORS
+// --- ULTIMATE CORS ---
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://samvel-r22r.vercel.app', 'https://samvel.vercel.app', /\.vercel\.app$/] 
-    : 'http://localhost:3000',
-  credentials: true
+  origin: [
+    /\.vercel\.app$/,
+    'http://localhost:3000',
+    'http://localhost:5000',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:5000'
+  ],
+  credentials: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type,Authorization'
 }));
 
 // Dev logging middleware
@@ -67,7 +73,7 @@ if (process.env.NODE_ENV !== 'production') {
   );
 
   // Handle unhandled promise rejections
-  process.on('unhandledRejection', (err, promise) => {
+  process.on('unhandledRejection', (err) => {
     console.log(`Error: ${err.message}`.red);
     // Close server & exit process
     server.close(() => process.exit(1));
